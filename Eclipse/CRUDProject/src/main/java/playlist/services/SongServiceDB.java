@@ -21,38 +21,38 @@ public class SongServiceDB implements SongService {
 
 	@Override
 	public Song addSong(Song s) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repo.save(s);
 	}
 
 	@Override
 	public List<Song> getAllSongs() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repo.findAll();
 	}
 
 	@Override
 	public Song getSongById(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repo.findById(i).get();
 	}
 
 	@Override
 	public List<Song> getByArtist(String artist) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repo.findByArtist(artist);
 	}
 
 	@Override
 	public Song replaceSong(int i, Song s) {
-		// TODO Auto-generated method stub
-		return null;
+		Song found = this.repo.findById(i).get();
+		found.setSongName(s.getSongName());
+		found.setArtist(s.getArtist());
+		found.setDuration(s.getDuration());
+		Song replaced = this.repo.save(found);
+		return replaced;
 	}
 
 	@Override
 	public String deleteSong(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		this.repo.deleteById(i);
+		return "Deleted: " + i;
 	}
 
 }
