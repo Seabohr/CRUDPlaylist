@@ -115,7 +115,7 @@ public class SongControllerIntegrationTests {
 		Song testSong = new Song("Riding The Void", "S.P.Y", 5.58);
 		String testSongJSON = this.mapper.writeValueAsString(testSong);
 
-		RequestBuilder request = put("/updateSong/1").contentType(MediaType.APPLICATION_JSON).content(testSongJSON);
+		RequestBuilder request = put("/replaceSong/1").contentType(MediaType.APPLICATION_JSON).content(testSongJSON);
 
 		ResultMatcher checkStatus = status().is(202);
 
