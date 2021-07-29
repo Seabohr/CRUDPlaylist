@@ -15,39 +15,39 @@
     <main>
         <h1>Playlist</h1>
         <br>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h3 class="sub">Add song:</h3>
-                    <table class="Add">
-                        <tr>
-                            <th class="header">Song Name</th>
-                            <th class="header">Artist</th>
-                            <th class="header">Length</th>
-                        </tr>
-                        <tr>
-                            <td><input id="A1" type="text" name="songName" required></td>
-                            <td><input id="A2" type="text" name="artist" required></td>
-                            <td><input id="A3" type="number" step="0.01" min="0.00" max="10:00" name="duration" size="4" required></td>
-                        </tr>
-                    </table>
-                    <button type="submit" id="submitsong">Add</button>
-                </div>
-                <div class="col">
-                    <h3 class="sub">Find Artist:</h3>
-                    <br>
-                    <lable for="fartistname">Name: </lable>
-                    <input id="fartistname" type="test" name="artist" required>
-                    <button type="submit" id="searchartist">Search</button>
-                    <div id="searchresult">
-                
+        <h3 class="sub">Add song:</h3>
+            <div class="container">
+                <form id="addSongForm">
+                    <div class="row">
+                        <div class="col"><label for="A1">Song Name</label></div>
+                        <div class="col"><label for="A2">Artist</label></div>
+                        <div class="col"><label for="A3">Duration</label></div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col"><input id="A1" type="text" name="songName" required></div>
+                        <div class="col"><input id="A2" type="text" name="artist" required></div>
+                        <div class="col"><input id="A3" type="number" step="0.01" min="0.00" max="10:00" name="duration" size="4" required></div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" id="submitsong">Add</button>
+                    </div>
+                </form>
             </div>
+        <br>            
+        <h3 class="sub">Find Artist:</h3>
+        <br>
+        <div id="findinput">
+            <lable for="fartistname">Name: </lable>
+            <input id="fartistname" type="test" name="artist" required>
+            <button type="submit" id="searchartist">Search</button>
+        </div>
+        <div id="searchresult">
+                
         </div>
 
+        <br>
+        <h3 class="sub">Playlist:</h3>
         <div class="container" id="allsongssect">
-            <h3 class="sub">Playlist:</h3>
             <div id="playlist">
                 
             </div>

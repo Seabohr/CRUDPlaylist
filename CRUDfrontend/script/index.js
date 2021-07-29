@@ -12,7 +12,7 @@ const playlistdiv = document.querySelector("#playlist")
 
 const renderSongs = (song, location) => {
     const nextSong = document.createElement('div');
-    nextSong.innerText = `Song: ${song.songName}, Artist: ${song.artist}, Duration: ${song.duration}`;
+    nextSong.innerText = `Song: ${song.songName}, Artist: ${song.artist}, Duration: ${song.duration} `;
     const deleteButton = document.createElement('button');
     deleteButton.innerText = "Delete";
     deleteButton.addEventListener('click', () => deleteSong(song.id));
@@ -28,3 +28,25 @@ const getAll = () => {
         music.forEach(song => renderSongs(song, playlistdiv));
     }).catch(err => console.log(err));
 }
+
+getAll();
+
+document.querySelector("form#addSongForm").addEventListener('submit', function(e) {
+    e.preventDefault();
+    console.log("Add: ", this);
+
+    const data = {
+        songName: this.songName.value,
+        artist: this.artist.value,
+        duration: this.duration.value
+    }
+    console.log("Data: ", data);
+
+    axios.post(`${baseURL}/addSong`, data)
+    .then(res => {
+        console.log(res);
+        getAll();
+        this.reset();
+        this.songName.focus();
+    }).catch(err => console.log(err));
+})
