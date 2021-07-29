@@ -29,6 +29,14 @@ const getAll = () => {
     }).catch(err => console.log(err));
 }
 
+const deleteSong = (id) => {
+    axios.delete(`${baseURL}/deleteSong/${id}`)
+    .then(res => {
+        console.log(res);
+        getAll();
+    }).catch(err => console.log(err));
+}
+
 getAll();
 
 document.querySelector("form#addSongForm").addEventListener('submit', function(e) {
