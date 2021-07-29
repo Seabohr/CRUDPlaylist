@@ -12,12 +12,44 @@ const playlistdiv = document.querySelector("#playlist")
 
 const renderSongs = (song, location) => {
     const nextSong = document.createElement('div');
-    nextSong.innerText = `Song: ${song.songName}, Artist: ${song.artist}, Duration: ${song.duration} `;
-    const deleteButton = document.createElement('button');
-    deleteButton.innerText = "Delete";
-    deleteButton.addEventListener('click', () => deleteSong(song.id));
-    nextSong.appendChild(deleteButton);
+    nextSong.setAttribute("class", "row");
+
+    const name = document.createElement('div');
+    name.setAttribute("class", "col");
+    name.innerText = `${song.songName}`;
+    nextSong.appendChild(name);
+
+    const art = document.createElement('div');
+    art.setAttribute("class", "col");
+    art.innerText = `${song.artist}`;
+    nextSong.appendChild(art);
+
+    const dur = document.createElement('div');
+    dur.setAttribute("class", "col");
+    dur.innerText = `${song.duration}`;
+    nextSong.appendChild(dur);
+
+    const options = document.createElement('div');
+    options.setAttribute("class", "row");
+
+    const updateDiv = document.createElement('div');
+    updateDiv.setAttribute("class", "col");
+    const updateButton = document.createElement('button');
+    updateButton.innerText = "Update";
+    updateButton.addEventListener('click', () => replaceSong(song.id));
+    updateDiv.appendChild(updateButton);
+    options.appendChild(updateDiv);
+
+    const delDiv = document.createElement('div');
+    delDiv.setAttribute("class", "col");
+    const delButton = document.createElement('button');
+    delButton.innerText = "Delete";
+    delButton.addEventListener('click', () => deleteSong(song.id));
+    delDiv.appendChild(delButton);
+    options.appendChild(delDiv);
+
     location.appendChild(nextSong);
+    location.appendChild(options);
 }
 
 const getAll = () => {
@@ -38,6 +70,23 @@ const deleteSong = (id) => {
 }
 
 getAll();
+
+const ups = document.querySelector("form#updateForm");
+const replaceSong = (id) => {
+    
+    const rep = {
+        songName: ups.songName.value,
+        artist: ups.artist.value,
+        duration: ups.duration.value
+    }
+    console.log("Data: ", rep);
+
+    axios.put(`${baseURL}/replaceSong/${id}`, rep)
+    .then(res => {
+        console.log(res);
+        getAll();
+    }).catch(err => console.log(err));
+}
 
 document.querySelector("form#addSongForm").addEventListener('submit', function(e) {
     e.preventDefault();
