@@ -58,3 +58,23 @@ document.querySelector("form#addSongForm").addEventListener('submit', function(e
         this.songName.focus();
     }).catch(err => console.log(err));
 })
+
+const artistInput = document.querySelector("#fartistname");
+const results = document.querySelector("#searchResult")
+const searchButton = document.querySelector("#searchArtist")
+
+const findByArtist = () => {
+
+    const artistName = artistInput.value;
+    axios.get(`${baseURL}/getArtist/${artistName}`)
+    .then(res => {
+        console.log("search");
+        const music = res.data;
+        results.innerHTML = "";
+        music.forEach(music => renderSongs(music, results));
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+searchButton.addEventListener('click', findByArtist)
